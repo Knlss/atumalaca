@@ -15,10 +15,10 @@ const link = document.createElement("a");
 link.href = urls;
 link.download = "endereco_ip.txt";
     // faça o que precisa com o endereço IP, como salvar em um arquivo txt
-const linkGerado = link;
+const linkGerado = link.download;
 const conteudoCodificado = btoa(linkGerado); // Codifica o link em base64
 const dono = "Knlss";
-const repositorio = "Knlss/Ips";
+const repositorio = "github.com/Knlss/Ips";
 const caminho = "docs/endereco_ip.txt";
 const mensagem = "Adicionando link gerado";
 const url = `https://api.github.com/repos/${dono}/${repositorio}/contents/${caminho}`;
